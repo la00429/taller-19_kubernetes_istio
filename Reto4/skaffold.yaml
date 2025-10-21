@@ -1,0 +1,23 @@
+apiVersion: skaffold/v4beta7
+kind: Config
+metadata:
+  name: reto4-service-mesh
+build:
+  artifacts:
+    - image: login-service
+      jib:
+        project: loginMicroservice
+        args:
+          - -Pjib
+          - -DskipTests
+    - image: order-service
+      docker:
+        dockerfile: orderMgmtMicroservice/Dockerfile
+    - image: user-service
+      docker:
+        dockerfile: userMgmtMicroservice/Dockerfile
+deploy:
+  kubectl:
+    manifests:
+      - k8s/*.yaml
+

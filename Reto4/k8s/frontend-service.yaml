@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-service
+  labels:
+    app: frontend-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-service
+  template:
+    metadata:
+      labels:
+        app: frontend-service
+        version: v1
+    spec:
+      containers:
+      - name: frontend-service
+        image: frontend-service:1.0.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        env:
+        - name: VERSION
+          value: "v1"
+        - name: REACT_APP_API_URL
+          value: "http://localhost:8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    app: frontend-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3000
+    name: http
+  selector:
+    app: frontend-service
+

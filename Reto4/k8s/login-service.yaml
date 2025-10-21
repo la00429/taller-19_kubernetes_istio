@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login-service
+  labels:
+    app: login-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: login-service
+  template:
+    metadata:
+      labels:
+        app: login-service
+        version: v1
+    spec:
+      containers:
+      - name: login-service
+        image: login-service:1.0.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8081
+        env:
+        - name: VERSION
+          value: "v1"
+        - name: SPRING_PROFILES_ACTIVE
+          value: "kubernetes"
+        - name: DB_HOST
+          value: "mysql-service"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_NAME
+          value: "usersdb"
+        - name: DB_USER
+          value: "user"
+        - name: DB_PASSWORD
+          value: "password"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: login-service
+  labels:
+    app: login-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8081
+    name: http
+  selector:
+    app: login-service

@@ -1,0 +1,449 @@
+node{
+	stage("Git clone"){
+		git credentialsId: 'GITHUB_CREDENTIALS', url: 'https://github.com/surjeetkm/multiproject.git'
+	}
+	stage("Maven clean build artifact"){	Laura@LAPTOP-OI839LLH MINGW64 ~/Documents/projects2025/Ingeniería dde Software ii/serviceMesh_Kubernetes/sample-istio-services (master)
+$ mvn compile jib:dockerBuild -Pjib -DskipTests
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/C:/Users/Laura/AppData/Roaming/Code/User/globalStorage/pleiades.java-extension-pack-jdk/maven/latest/lib/guice-5.1.0-classes.jar)        
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release        
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] sample-istio-services                                              [pom]      
+[INFO] caller-service                                                     [jar]      
+[INFO] callme-service                                                     [jar]      
+[INFO] first-service                                                      [jar]      
+[INFO] 
+[INFO] --------------< pl.piomin.services:sample-istio-services >--------------      
+[INFO] Building sample-istio-services 1.1.0                               [1/4]      
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------      
+[INFO] 
+[INFO] --- jib:3.4.6:dockerBuild (default-cli) @ sample-istio-services ---
+[INFO] Skipping containerization because packaging is 'pom'...
+[INFO]
+[INFO] -----------------< pl.piomin.services:caller-service >------------------      
+[INFO] Building caller-service 1.1.0                                      [2/4]      
+[INFO]   from caller-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------      
+[INFO] 
+[INFO] --- spring-boot:3.5.6:build-info (default) @ caller-service ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ caller-service ---        
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ caller-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- jib:3.4.6:dockerBuild (default-cli) @ caller-service ---
+[INFO] Tagging image with generated image reference caller-service:1.1.0. If you'd like to specify a different tag, you can set the <to><image> parameter in your pom.xml, or use the -Dimage=<MY IMAGE> commandline flag.
+[WARNING] 'mainClass' configured in 'maven-jar-plugin' is not a valid Java class: ${start-class}
+[INFO] 
+[INFO] Containerizing application to Docker daemon as caller-service:1.1.0...        
+[WARNING] Base image 'eclipse-temurin:21-jdk-ubi9-minimal' does not use a specific image digest - build may not be reproducible
+[INFO] The base image requires auth. Trying again for eclipse-temurin:21-jdk-ubi9-minimal...
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry-1.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry.hub.docker.com
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: index.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[INFO] Using base image with digest: sha256:c8eea1327d87494f046b4b35e3c484c59a93fb91d8d24cd81ff5afaf42c9c22d
+[INFO]
+[INFO] Container entrypoint set to [java, -cp, @/app/jib-classpath-file, pl.piomin.services.caller.CallerApplication]
+[INFO]
+[INFO] Built image to Docker daemon as caller-service:1.1.0
+[INFO] Executing tasks:
+[INFO] [==============================] 100,0% complete
+[INFO] 
+[INFO] 
+[INFO] -----------------< pl.piomin.services:callme-service >------------------      
+[INFO] Building callme-service 1.2.1                                      [3/4]      
+[INFO]   from callme-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------      
+[INFO] 
+[INFO] --- spring-boot:3.5.6:build-info (default) @ callme-service ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ callme-service ---        
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ callme-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- jib:3.4.6:dockerBuild (default-cli) @ callme-service ---
+[INFO] Tagging image with generated image reference callme-service:1.2.1. If you'd like to specify a different tag, you can set the <to><image> parameter in your pom.xml, or use the -Dimage=<MY IMAGE> commandline flag.
+[WARNING] 'mainClass' configured in 'maven-jar-plugin' is not a valid Java class: ${start-class}
+[INFO] 
+[INFO] Containerizing application to Docker daemon as callme-service:1.2.1...        
+[WARNING] Base image 'eclipse-temurin:21-jdk-ubi9-minimal' does not use a specific image digest - build may not be reproducible
+[INFO] The base image requires auth. Trying again for eclipse-temurin:21-jdk-ubi9-minimal...
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry-1.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry.hub.docker.com
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: index.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[INFO] Using base image with digest: sha256:c8eea1327d87494f046b4b35e3c484c59a93fb91d8d24cd81ff5afaf42c9c22d
+[INFO]
+[INFO] Container entrypoint set to [java, -cp, @/app/jib-classpath-file, pl.piomin.services.callme.CallmeApplication]
+[INFO]
+[INFO] Built image to Docker daemon as callme-service:1.2.1
+[INFO] Executing tasks:
+[INFO] [==============================] 100,0% complete
+[INFO]
+[INFO]
+[INFO] ------------------< pl.piomin.services:first-service >------------------      
+[INFO] Building first-service 1.1.0                                       [4/4]      
+[INFO]   from first-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------      
+[INFO] 
+[INFO] --- spring-boot:3.5.6:build-info (default) @ first-service ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ first-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ first-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- jib:3.4.6:dockerBuild (default-cli) @ first-service ---
+[INFO] Tagging image with generated image reference first-service:1.1.0. If you'd like to specify a different tag, you can set the <to><image> parameter in your pom.xml, or use the -Dimage=<MY IMAGE> commandline flag.
+[WARNING] 'mainClass' configured in 'maven-jar-plugin' is not a valid Java class: ${start-class}
+[INFO]
+[INFO] Containerizing application to Docker daemon as first-service:1.1.0...
+[WARNING] Base image 'eclipse-temurin:21-jdk-ubi9-minimal' does not use a specific image digest - build may not be reproducible
+[INFO] The base image requires auth. Trying again for eclipse-temurin:21-jdk-ubi9-minimal...
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry-1.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry.hub.docker.com
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: index.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[INFO] Using base image with digest: sha256:c8eea1327d87494f046b4b35e3c484c59a93fb91d8d24cd81ff5afaf42c9c22d
+[INFO]                                                                               
+[INFO] Container entrypoint set to [java, -cp, @/app/jib-classpath-file, pl.piomin.services.first.FirstApplication]                                                       
+[INFO]
+[INFO] Built image to Docker daemon as first-service:1.1.0
+[INFO] Executing tasks:
+[INFO] [==============================] 100,0% complete
+[INFO]
+[INFO] ------------------------------------------------------------------------      
+[INFO] Reactor Summary:
+[INFO]
+[INFO] sample-istio-services 1.1.0 ........................ SUCCESS [  1.488 s]      
+[INFO] caller-service 1.1.0 ............................... SUCCESS [ 22.540 s]      
+[INFO] callme-service 1.2.1 ............................... SUCCESS [ 22.069 s]      
+[INFO] first-service 1.1.0 ................................ SUCCESS [ 18.840 s]      
+[INFO] ------------------------------------------------------------------------      
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------      
+[INFO] Total time:  01:05 min
+[INFO] Finished at: 2025-10-20T17:17:22-05:00
+[INFO] ------------------------------------------------------------------------      
+
+Laura@LAPTOP-OI839LLH MINGW64 ~/Documents/projects2025/Ingeniería dde Software ii/serviceMesh_Kubernetes/sample-istio-services (master)
+$ kubectl apply -f caller-service/k8s/deployment.yaml
+error: error validating "caller-service/k8s/deployment.yaml": error validating data: failed to download openapi: Get "https://127.0.0.1:36999/openapi/v2?timeout=32s": dial tcp 127.0.0.1:36999: connectex: No connection could be made because the target machine actively refused it.; if you choose to ignore these errors, turn validation off with --validate=false
+
+Laura@LAPTOP-OI839LLH MINGW64 ~/Documents/projects2025/Ingeniería dde Software ii/serviceMesh_Kubernetes/sample-istio-services (master)
+$ eval $(minikube docker-env)
+
+Laura@LAPTOP-OI839LLH MINGW64 ~/Documents/projects2025/Ingeniería dde Software ii/serviceMesh_Kubernetes/sample-istio-services (master)
+$ cd ~/Documents/projects2025/Ingeniería\ dde\ Software\ ii/serviceMesh_Kubernetes/sample-istio-services
+
+Laura@LAPTOP-OI839LLH MINGW64 ~/Documents/projects2025/Ingeniería dde Software ii/serviceMesh_Kubernetes/sample-istio-services (master)
+$ mvn clean compile jib:dockerBuild -Pjib -DskipTests
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/C:/Users/Laura/AppData/Roaming/Code/User/globalStorage/pleiades.java-extension-pack-jdk/maven/latest/lib/guice-5.1.0-classes.jar)        
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release        
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] sample-istio-services                                              [pom]      
+[INFO] caller-service                                                     [jar]      
+[INFO] callme-service                                                     [jar]      
+[INFO] first-service                                                      [jar]      
+[INFO] 
+[INFO] --------------< pl.piomin.services:sample-istio-services >--------------      
+[INFO] Building sample-istio-services 1.1.0                               [1/4]      
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------      
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ sample-istio-services ---
+[INFO] 
+[INFO] --- jib:3.4.6:dockerBuild (default-cli) @ sample-istio-services ---
+[INFO] Skipping containerization because packaging is 'pom'...
+[INFO]
+[INFO] -----------------< pl.piomin.services:caller-service >------------------      
+[INFO] Building caller-service 1.1.0                                      [2/4]      
+[INFO]   from caller-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------      
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ caller-service ---
+[INFO] Deleting C:\Users\Laura\Documents\projects2025\Ingeniería dde Software ii\serviceMesh_Kubernetes\sample-istio-services\caller-service\target
+[INFO] 
+[INFO] --- spring-boot:3.5.6:build-info (default) @ caller-service ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ caller-service ---        
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ caller-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 2 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- jib:3.4.6:dockerBuild (default-cli) @ caller-service ---
+[INFO] Tagging image with generated image reference caller-service:1.1.0. If you'd like to specify a different tag, you can set the <to><image> parameter in your pom.xml, or use the -Dimage=<MY IMAGE> commandline flag.
+[WARNING] 'mainClass' configured in 'maven-jar-plugin' is not a valid Java class: ${start-class}
+[INFO] 
+[INFO] Containerizing application to Docker daemon as caller-service:1.1.0...        
+[WARNING] Base image 'eclipse-temurin:21-jdk-ubi9-minimal' does not use a specific image digest - build may not be reproducible
+[INFO] The base image requires auth. Trying again for eclipse-temurin:21-jdk-ubi9-minimal...
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry-1.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry.hub.docker.com
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: index.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[INFO] Using base image with digest: sha256:c8eea1327d87494f046b4b35e3c484c59a93fb91d8d24cd81ff5afaf42c9c22d
+[INFO]
+[INFO] Container entrypoint set to [java, -cp, @/app/jib-classpath-file, pl.piomin.services.caller.CallerApplication]
+[INFO]
+[INFO] Built image to Docker daemon as caller-service:1.1.0
+[INFO] Executing tasks:
+[INFO] [==============================] 100,0% complete
+[INFO]
+[INFO] 
+[INFO] -----------------< pl.piomin.services:callme-service >------------------      
+[INFO] Building callme-service 1.2.1                                      [3/4]      
+[INFO]   from callme-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------      
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ callme-service ---
+[INFO] Deleting C:\Users\Laura\Documents\projects2025\Ingeniería dde Software ii\serviceMesh_Kubernetes\sample-istio-services\callme-service\target
+[INFO] 
+[INFO] --- spring-boot:3.5.6:build-info (default) @ callme-service ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ callme-service ---        
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ callme-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- jib:3.4.6:dockerBuild (default-cli) @ callme-service ---
+[INFO] Tagging image with generated image reference callme-service:1.2.1. If you'd like to specify a different tag, you can set the <to><image> parameter in your pom.xml, or use the -Dimage=<MY IMAGE> commandline flag.
+[WARNING] 'mainClass' configured in 'maven-jar-plugin' is not a valid Java class: ${start-class}
+[INFO] 
+[INFO] Containerizing application to Docker daemon as callme-service:1.2.1...        
+[WARNING] Base image 'eclipse-temurin:21-jdk-ubi9-minimal' does not use a specific image digest - build may not be reproducible
+[INFO] The base image requires auth. Trying again for eclipse-temurin:21-jdk-ubi9-minimal...
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry-1.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry.hub.docker.com
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: index.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[INFO] Using base image with digest: sha256:c8eea1327d87494f046b4b35e3c484c59a93fb91d8d24cd81ff5afaf42c9c22d
+[INFO]                                                                               
+[INFO] Container entrypoint set to [java, -cp, @/app/jib-classpath-file, pl.piomin.services.callme.CallmeApplication]
+[INFO]
+[INFO] Built image to Docker daemon as callme-service:1.2.1
+[INFO] Executing tasks:
+[INFO] [==============================] 100,0% complete
+[INFO]
+[INFO]
+[INFO] ------------------< pl.piomin.services:first-service >------------------      
+[INFO] Building first-service 1.1.0                                       [4/4]      
+[INFO]   from first-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------      
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ first-service ---
+[INFO] Deleting C:\Users\Laura\Documents\projects2025\Ingeniería dde Software ii\serviceMesh_Kubernetes\sample-istio-services\first-service\target
+[INFO] 
+[INFO] --- spring-boot:3.5.6:build-info (default) @ first-service ---
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ first-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ first-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 2 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- jib:3.4.6:dockerBuild (default-cli) @ first-service ---
+[INFO] Tagging image with generated image reference first-service:1.1.0. If you'd like to specify a different tag, you can set the <to><image> parameter in your pom.xml, or use the -Dimage=<MY IMAGE> commandline flag.
+[WARNING] 'mainClass' configured in 'maven-jar-plugin' is not a valid Java class: ${start-class}
+[INFO]
+[INFO] Containerizing application to Docker daemon as first-service:1.1.0...
+[WARNING] Base image 'eclipse-temurin:21-jdk-ubi9-minimal' does not use a specific image digest - build may not be reproducible
+[INFO] The base image requires auth. Trying again for eclipse-temurin:21-jdk-ubi9-minimal...
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry-1.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: registry.hub.docker.com
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: index.docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[WARNING] The credential helper (docker-credential-desktop) has nothing for server URL: docker.io
+
+Got output:
+
+credentials not found in native keychain
+
+[INFO] Using base image with digest: sha256:c8eea1327d87494f046b4b35e3c484c59a93fb91d8d24cd81ff5afaf42c9c22d
+[INFO]
+[INFO] Container entrypoint set to [java, -cp, @/app/jib-classpath-file, pl.piomin.services.first.FirstApplication]
+[INFO]
+[INFO] Built image to Docker daemon as first-service:1.1.0
+[INFO] Executing tasks:
+[INFO] [==============================] 100,0% complete
+[INFO]
+[INFO] ------------------------------------------------------------------------      
+[INFO] Reactor Summary:
+[INFO]
+[INFO] sample-istio-services 1.1.0 ........................ SUCCESS [  1.512 s]      
+[INFO] caller-service 1.1.0 ............................... SUCCESS [ 26.657 s]      
+[INFO] callme-service 1.2.1 ............................... SUCCESS [  9.700 s]      
+[INFO] first-service 1.1.0 ................................ SUCCESS [  9.782 s]      
+[INFO] ------------------------------------------------------------------------      
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------      
+[INFO] Total time:  48.338 s
+[INFO] Finished at: 2025-10-20T17:29:18-05:00
+[INFO] ------------------------------------------------------------------------      
+
+		def mavenHome= tool name: "Maven", type: "maven"
+		def command= "${mavenHome}/bin/mvn"
+		sh "${command} clean install"
+	}
+	stage("Run Junit and Integration Test cases"){}
+	stage('Caller-service image') {
+   	 	dir ('caller-service') {
+    			app=docker.build("microservices-2020/caller-service")
+    			docker.withRegistry('https://eu.gcr.io', 'gcr:myregistry') {
+ 	 			app.push("${env.BUILD_NUMBER}")
+ 	 			app.push("latest")
+        		}
+  		}
+  	}
+  	
+  	stage("callme image"){
+       		dir ('callme-service') {
+    			app=docker.build("microservices-2020/callme-service")
+    			docker.withRegistry('https://eu.gcr.io', 'gcr:myregistry') {
+ 	 			app.push("${env.BUILD_NUMBER}")
+ 	 			app.push("latest")
+        		}
+        	}
+     }  
+}

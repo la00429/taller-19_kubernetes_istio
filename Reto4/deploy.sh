@@ -2,20 +2,7 @@
 
 echo "Desplegando Reto 4 con Service Mesh (Istio)"
 
-# 1. Iniciar Minikube
-echo "Iniciando Minikube..."
-minikube start --driver=docker --cpus=2 --memory=6144
-
-# 2. Instalar Istio
-echo "Instalando Istio..."
-istioctl install --set profile=demo -y
-kubectl label namespace default istio-injection=enabled
-
-# 3. Configurar Docker
-echo "Configurando Docker..."
-eval $(minikube docker-env)
-
-# 4. Compilar y preparar microservicios
+# 1. Compilar y preparar microservicios PRIMERO
 echo "Compilando login-service (Java/Maven)..."
 cd loginMicroservice && mvn clean package -DskipTests && cd ..
 
@@ -28,7 +15,20 @@ cd userMgmtMicroservice && go mod tidy && go build -o main . && cd ..
 echo "Preparando frontend (Node.js)..."
 cd frontend && npm install && cd ..
 
-# 5. Construir imágenes
+# 2. Iniciar Minikube
+echo "Iniciando Minikube..."
+minikube start --driver=docker --cpus=2 --memory=6144
+
+# 3. Instalar Istio
+echo "Instalando Istio..."
+istioctl install --set profile=demo -y
+kubectl label namespace default istio-injection=enabled
+
+# 4. Configurar Docker
+echo "Configurando Docker..."
+eval $(minikube docker-env)
+
+# 5. Construir imágenes Docker
 echo "Construyendo imágenes Docker..."
 docker build -t login-service:1.0.0 ./loginMicroservice/
 docker build -t order-service:1.0.0 ./orderMgmtMicroservice/

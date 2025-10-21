@@ -121,9 +121,16 @@ kubectl apply -f k8s/frontend-service.yaml
 # 7. Aplicar configuración Istio
 kubectl apply -f k8s/istio-gateway.yaml
 
-# 8. Obtener URLs
+# 8. Obtener URLs de acceso
+echo "URLs de acceso:"
+echo "Frontend:"
 minikube service frontend-service --url
+echo "Login Service:"
 minikube service login-service --url
+echo "Order Service:"
+minikube service order-service --url
+echo "User Service:"
+minikube service user-service --url
 ```
 
 ### Arquitectura de Microservicios
@@ -137,10 +144,21 @@ minikube service login-service --url
 
 ### Endpoints Disponibles
 
-- **Frontend**: `http://localhost:3000` - Interfaz de usuario
-- **Login API**: `http://localhost:8081/api/login` - Autenticación
-- **Order API**: `http://localhost:8000/api/order` - Gestión de órdenes
-- **User API**: `http://localhost:8080/api/user` - Gestión de usuarios
+**Para obtener las URLs reales, ejecuta:**
+```bash
+minikube service frontend-service --url
+minikube service login-service --url
+minikube service order-service --url
+minikube service user-service --url
+```
+
+**Las URLs serán similares a:**
+- **Frontend**: `http://127.0.0.1:XXXXX` - Interfaz de usuario (puerto dinámico)
+- **Login API**: `http://127.0.0.1:XXXXX/api/login` - Autenticación (puerto dinámico)
+- **Order API**: `http://127.0.0.1:XXXXX/api/order` - Gestión de órdenes (puerto dinámico)
+- **User API**: `http://127.0.0.1:XXXXX/api/user` - Gestión de usuarios (puerto dinámico)
+
+**Nota:** Los puertos son asignados dinámicamente por Minikube. Usa `minikube service <service-name> --url` para obtener la URL exacta.
 
 ## 🔍 Comandos de Diagnóstico
 
@@ -177,6 +195,8 @@ kubectl exec -it <pod-name> -c <container-name> -- curl <service-name>:<port>/he
 2. **Error de imagen no encontrada**: Ejecutar `eval $(minikube docker-env)` antes de construir imágenes
 3. **Error de puerto**: Verificar que los puertos en los manifiestos coincidan con los de las aplicaciones
 4. **Error de sidecar**: Verificar que Istio esté instalado y configurado correctamente
+5. **No se puede acceder a los servicios**: Usar `minikube service <service-name> --url` para obtener la URL correcta
+6. **Servicios no responden**: Verificar que los pods estén en estado `Running` con `kubectl get pods`
 
 ### Limpiar Recursos
 
